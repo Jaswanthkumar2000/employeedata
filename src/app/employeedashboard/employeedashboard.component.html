@@ -1,0 +1,102 @@
+<nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+        <h3 class="text-white">Employee Data</h3>
+    <div class="d-flex">
+        <button (click) = clickAddEmployee() class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Employee</button>
+    </div>
+   </div>
+</nav>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Employee ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email Id</th>
+            <th scope="col">Mobile</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let row of employeeData">
+        <td>{{row.id}}</td>
+        <td>{{row.firstName}}</td>
+        <td>{{row.lastName}}</td>
+        <td>{{row.gmail}}</td>
+        <td>{{row.phonenumber}}</td>
+        <td>{{row.salary}}</td>
+        <td>
+            <button (click) = onEdit(row)  class="btn btn-info mx-1 text-white"  type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+            <button (click) = deleteEmployee(row) class="btn btn-danger mx-1 text-white">Delete</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button> -->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Employee Details</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup] = "employeeForm" (ngSubmit)= "onSubmit()">
+                <!-- <div class="mb-3">
+            <label for="exampleInputEmployeeId" class="form-label">Employee Id</label>
+            <input type="number" formControlName="employeeId" class="form-control" id="exampleInputEmployeeId" aria-describedby="emailHelp"> 
+                </div> -->
+                <div class="mb-3">
+                <label for="exampleInputLname" class="form-label">First Name</label>
+                  <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': f.firstName.touched && f.firstName.errors }" id="exampleInputFname">
+                  <div *ngIf="f.firstName.touched && f.firstName.errors" class="invalid-feedback">
+                  <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputLname" class="form-label">Last Name</label>
+                    <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': f.lastName.touched && f.lastName.errors }" id="exampleInputLname">
+                    <div *ngIf="f.lastName.touched && f.lastName.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                 </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail" class="form-label">Email</label>
+                    <input type="mail" formControlName="gmail" class="form-control" [ngClass]="{ 'is-invalid': f.gmail.touched && f.gmail.errors }" id="exampleInputEmail">
+                    <div *ngIf="f.gmail.touched && f.gmail.errors" class="invalid-feedback">
+                    <div *ngIf="f.gmail.errors.required">Gmail is required</div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputMobilenumber" class="form-label">Mobile number</label>
+                    <input type="number" formControlName="phonenumber" class="form-control" [ngClass]="{ 'is-invalid': f.phonenumber.touched && f.phonenumber.errors }" id="exampleInputMobilenumber">
+                    <div *ngIf="f.phonenumber.touched && f.phonenumber.errors" class="invalid-feedback">
+                    <div *ngIf="f.phonenumber.errors.required">Mobile number is required</div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputSalary" class="form-label">Salary</label>
+                    <input type="number" formControlName="salary" class="form-control" [ngClass]="{ 'is-invalid': f.salary.touched && f.salary.errors }" id="exampleInputSalary">
+                    <div *ngIf="f.salary.touched && f.salary.errors" class="invalid-feedback">
+                    <div *ngIf="f.salary.errors.required">Salary is required</div>
+                    </div>
+                  </div>
+                
+                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+              </form> 
+        </div> 
+        <div class="modal-footer">
+          <button type="button"  id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button"  *ngIf = "showAdd" (click)="postEmployeeDetails()" class="btn btn-primary">Add</button>
+          <button type="button" *ngIf = "showUpdate" (click)="updateEmployeeDetails()" class="btn btn-primary">Update</button>
+       </div>
+      </div>
+    </div>
+  </div>

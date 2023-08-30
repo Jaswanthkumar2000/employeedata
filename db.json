@@ -1,0 +1,17 @@
+{
+  "posts": [
+    {
+      "employeeId": 0,
+      "firstName": "test",
+      "lastName": "test",
+      "gmail": "test",
+      "phonenumber": 123,
+      "salary": 2324345,
+      "id": 1
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}
